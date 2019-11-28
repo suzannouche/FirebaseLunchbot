@@ -31,9 +31,8 @@ function loadOrderHistory() {
           addRow(tableOrders, allRestaurantsPerOrder, order.data().date, order.data().price, order.data().comment, order.data().id);
 
           if (order.data().id == 2) {
-            var orderObj = firestore.collection("orders").where('id', '==', order.data().id).limit(1).get();
-            console.log("order: ", orderObj);
-            orderObj.update({
+            var orderObj = firestore.collection("orders").where('id', '==', order.data().id).limit(1).get()
+              .update({
               "comment": "updated comment"
               })
               .then(function() {
