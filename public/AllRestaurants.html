@@ -1,0 +1,122 @@
+<html>
+<head  >
+    <h1 align="center" >All Restaurants</h1>
+    <style>
+        form {
+          /* Center the form on the page */
+          margin: 0 auto;
+          width: 600px;
+          /* Form outline */
+          padding: 1em;
+          border: 1px solid #CCC;
+          border-radius: 1em;
+        }
+        form div + div {
+          margin-top: 1em;
+        }
+        label {
+          /* Uniform size & alignment */
+          display: inline-block;
+          width: 90px;
+          text-align: right;
+        }
+        input,
+        textarea {
+          /* To make sure that all text fields have the same font settings
+             By default, textareas have a monospace font */
+          font: 1em sans-serif;
+          /* Uniform text field size */
+          width: 300px;
+          box-sizing: border-box;
+          /* Match form field borders */
+          border: 1px solid #999;
+        }
+        input:focus,
+        textarea:focus {
+          /* Additional highlight for focused elements */
+          border-color: #000;
+        }
+        textarea {
+          /* Align multiline text fields with their labels */
+          vertical-align: top;
+          /* Provide space to type some text */
+          height: 5em;
+        }
+        .button {
+          /* Align buttons with the text fields */
+          padding-left: 90px; /* same size as the label elements */
+        }
+        button {
+          /* This extra margin represent roughly the same space as the space
+             between the labels and their text fields */
+          margin-left: .5em;
+        }
+
+        .spinner {
+  width: 100px;
+  height: 100px;
+  background-color: #0CB1C4;
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+  /* transform: rotate(3deg); */
+   /* transform: rotate(0.3rad);/ */
+   /* transform: rotate(3grad); */ 
+   /* transform: rotate(.03turn);  */
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+        </style>
+</head>
+<body onload='loadOrderHistory()'>
+<div  id="message"  >
+<div class= 'content' align="center">
+    <table>
+	    <col width="800"/>
+		<tr>
+            <th style="float: center">
+           </th>
+        </tr>
+        <div>
+            <table>
+                <col width="600">
+                <col width="600">
+                <tr>
+                <th style="float: left"><a href="OrderHistory.html" >Order History</a> </th>
+                <th style="float: right"><a href="Index.html" >Thursday Lunch</a></th>
+                </tr>
+        
+              </table>
+        </div>
+    </table>
+</div>
+<form class= "content"  >
+<div  align="center">
+     <div class="form-group">
+       <table align="center"  id="allRestaurants">
+            <col width='300'/>
+            <col width='300'/>
+            <col width='300'/>
+           <tr>
+             <th>Restaurant</th>
+             <th>Email</th>
+             <th>Action</th>
+           </tr>
+       </table>
+   </div>
+   </br>
+
+</div>
+</form>
+</div>
+</body>
+</html>
