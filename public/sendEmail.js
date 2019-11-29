@@ -3,15 +3,15 @@ var firestore = firebase.firestore();
 const sendDirectEmailButton = document.querySelector("#sendDirectEmailButton");
 
 sendDirectEmailButton.addEventListener("click", function(){
-    const date = document.querySelector("#deliveryDateId");
-    const totalPrice = document.querySelector("#totalPriceId");
-    var restaurantName = document.querySelector("#restaurantNameId");
-    var email = document.querySelector("#emailId");
-    var orderMessage = document.querySelector("#msgId");
+    const nDate = document.querySelector("#deliveryDateId").value;
+    const totalPrice = document.querySelector("#totalPriceId").value;
+    var restaurantName = document.querySelector("#restaurantNameId").value;
+    var email = document.querySelector("#emailId").value;
+    var orderMessage = document.querySelector("#msgId").value;
 
     var data = 
     {
-        subject: '[PartsTrader] Thursday lunch ' + date,
+        subject: '[PartsTrader] Thursday lunch ' + nDate,
         dest: email,
         body: orderMessage 
     }
@@ -28,26 +28,33 @@ sendDirectEmailButton.addEventListener("click", function(){
 
     userAction();
 
-    const docOrder = firestore.doc("orders/order"+date);
+    transformedRestaurantName = restaurantName.toLowerCase().replace(/[\s']+/g, ''); 
+    const docOrder = firestore.doc("orders/order"+nDate+transformedRestaurantName);
     const orderInfo = {
         comment: "",
-        date: date
+        date: nDate,
+        email: email,
+        lastOrder: orderMessage,
+        name: restaurantName,
+        price: totalPrice
     }
 
     docOrder.set(orderInfo)
     .then(function() {console.log("Order saved")})
     .catch(function (error) { console.log("Got an error: ", error)});
 
-    transformedRestaurantName = restaurantName.value.trim().toLowerCase(); 
-    docOrderRestaurant = firestore.doc("restaurants/"+transformedRestaurantName);
+
+    docRestaurant = firestore.doc("restaurants/"+transformedRestaurantName);
     const orderRestaurantInfo = {
         name: restaurantName,
         email: email,
-        lastOrder: emailBodyWithDate,
-        totalPrice: totalPrice
+        lastOrder: orderMessage,
+        totalPrice: totalPrice,
+        lastOrderDate: nDate
     }
-    docOrderRestaurant.set(orderRestaurantInfo)
+    docRestaurant.set(orderRestaurantInfo)
     .then(function() {console.log("Restaurant saved")})
     .catch(function (error) { console.log("Got an error: ", error)});
 
+    window.alert("New order sent!");
 });
